@@ -22,6 +22,11 @@ Gimbal::Result Gimbal::set_gimbal_mode(const Gimbal::GimbalMode gimbal_mode)
     return _impl->set_gimbal_mode(gimbal_mode);
 }
 
+Gimbal::Result Gimbal::send_mavlink_command(uint8_t target_system_id, uint8_t target_component_id, uint16_t command, bool current, bool autocontinue, float param1, float param2, float param3, float param4, int32_t x, int32_t y, float z)
+{
+    return _impl->send_mavlink_command(target_system_id, target_component_id, command, current, autocontinue, param1, param2, param3, param4, x, y, z);
+}
+
 void Gimbal::set_gimbal_mode_async(const Gimbal::GimbalMode gimbal_mode, result_callback_t callback)
 {
     _impl->set_gimbal_mode_async(gimbal_mode, callback);

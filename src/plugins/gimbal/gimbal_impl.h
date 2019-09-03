@@ -24,6 +24,8 @@ public:
 
     Gimbal::Result set_gimbal_mode(const Gimbal::GimbalMode gimbal_mode);
 
+    Gimbal::Result send_mavlink_command(uint8_t target_system_id, uint8_t target_component_id, uint16_t command, bool current, bool autocontinue, float param1, float param2, float param3, float param4, int32_t x, int32_t y, float z);
+
     void
     set_gimbal_mode_async(const Gimbal::GimbalMode gimbal_mode, Gimbal::result_callback_t callback);
 

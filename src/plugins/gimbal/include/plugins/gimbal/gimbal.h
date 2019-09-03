@@ -106,6 +106,12 @@ public:
      */
     Result set_gimbal_mode(const Gimbal::GimbalMode gimbal_mode);
 
+
+    /*
+    * Anotacao
+    */
+    Result send_mavlink_command(uint8_t target_system_id, uint8_t target_component_id, uint16_t command, bool current, bool autocontinue, float param1, float param2, float param3, float param4, int32_t x, int32_t y, float z);
+
     /**
      * @brief Set gimbal mode (asynchronous).
      *
