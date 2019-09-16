@@ -94,7 +94,6 @@ void GimbalImpl::set_gimbal_mode_async(
         command, std::bind(&GimbalImpl::receive_command_result, std::placeholders::_1, callback));
 }
 
-
 float GimbalImpl::to_float_gimbal_mode(const Gimbal::GimbalMode gimbal_mode) const
 {
     switch (gimbal_mode) {
