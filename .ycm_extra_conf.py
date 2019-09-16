@@ -93,6 +93,8 @@ flags = [
 '-I',
 'src/plugins/mavlink_passthrough/include',
 '-I',
+'src/plugins/passthrough/include',
+'-I',
 'src/backend/src',
 '-isystem',
 '/usr/include'

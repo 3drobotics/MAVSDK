@@ -22,6 +22,7 @@
 #include "param/param_service_impl.h"
 #include "plugins/offboard/offboard.h"
 #include "offboard/offboard_service_impl.h"
+#include "passthrough/passthrough_service_impl.h"
 
 namespace mavsdk {
 namespace backend {
@@ -48,7 +49,9 @@ public:
         _info(_dc.system()),
         _info_service(_info),
         _param(_dc.system()),
-        _param_service(_param)
+        _param_service(_param),
+        _passthrough(_dc.system()),
+        _passthrough_service(_passthrough)
     {}
 
     void run();
@@ -78,6 +81,8 @@ private:
     InfoServiceImpl<> _info_service;
     Param _param;
     ParamServiceImpl<> _param_service;
+    Passthrough _passthrough;
+    PassthroughServiceImpl<> _passthrough_service;
 
     std::unique_ptr<grpc::Server> _server;
 };
