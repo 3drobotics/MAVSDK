@@ -48,6 +48,7 @@ Passthrough::Result PassthroughImpl::send_message(const Passthrough::MavlinkMess
     if (!_parent->send_message(message)) {
         return Passthrough::Result::CONNECTION_ERROR;
     }
+
     return Passthrough::Result::SUCCESS;
 }
 
@@ -88,12 +89,7 @@ Passthrough::Result PassthroughImpl::send_command_int(const Passthrough::Command
     custom_command.params.y = command_int.params.y;
     custom_command.params.z = command_int.params.z;
 
-    // if (!_parent->send_command(custom_command)) {
-    //     return Passthrough::Result::CONNECTION_ERROR;
-    // } Anotacao: Fix this
-
-    _parent->send_command(custom_command);
-    return Passthrough::Result::SUCCESS;
+    return passthrough_result_from_command_result(_parent->send_command(custom_command));
 }
 
 Passthrough::Result PassthroughImpl::send_command_long(const Passthrough::CommandLong command_long)
@@ -112,11 +108,23 @@ Passthrough::Result PassthroughImpl::send_command_long(const Passthrough::Comman
     custom_command.params.param6 = command_long.params.param6;
     custom_command.params.param7 = command_long.params.param7;
 
-    // if (!_parent->send_command(custom_command)) {
-    //     return Passthrough::Result::CONNECTION_ERROR;
-    // }
-    _parent->send_command(custom_command);
-    return Passthrough::Result::SUCCESS;
+    return passthrough_result_from_command_result(_parent->send_command(custom_command));
+}
+
+Passthrough::Result PassthroughImpl::passthrough_result_from_command_result(MAVLinkCommands::Result command_result)
+{
+    switch (command_result) {
+        case MAVLinkCommands::Result::SUCCESS:
+            return Passthrough::Result::SUCCESS;
+        case MAVLinkCommands::Result::TIMEOUT:
+        case MAVLinkCommands::Result::NO_SYSTEM:
+        case MAVLinkCommands::Result::CONNECTION_ERROR:
+            return Passthrough::Result::CONNECTION_ERROR;
+        case MAVLinkCommands::Result::BUSY:
+        case MAVLinkCommands::Result::COMMAND_DENIED:
+        default:
+            return Passthrough::Result::UNKNOWN;
+    }
 }
 
 } // namespace mavsdk

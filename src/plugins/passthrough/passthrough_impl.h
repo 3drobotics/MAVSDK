@@ -28,7 +28,7 @@ public:
     Passthrough::Result send_command_long(const Passthrough::CommandLong command_long);
 
 private:
-    // static Passthrough::Result result_from_mavlink_parameters_result(MAVLinkParameters::Result result);
+     static Passthrough::Result passthrough_result_from_command_result(MAVLinkCommands::Result command_result);
 };
 
 } // namespace mavsdk
