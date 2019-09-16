@@ -58,52 +58,6 @@ public:
         return grpc::Status::OK;
     }
 
-
-     grpc::Status SendMavlinkCommand(
-        grpc::ServerContext* /* context */,
-        const rpc::gimbal::SendMavlinkCommandRequest* request,
-        rpc::gimbal::SendMavlinkCommandResponse* response) override
-    {
-        if (request != nullptr) {
-            const auto requested_target_system_id = request->target_system_id();
-            const auto requested_target_component_id = request->target_component_id();
-            const auto requested_command = request->command();
-            const auto requested_current = request->current();
-            const auto requested_autocontinue = request->autocontinue();
-            const auto requested_param1 = request->param1();
-            const auto requested_param2 = request->param2();
-            const auto requested_param3 = request->param3();
-            const auto requested_param4 = request->param4();
-            const auto requested_x = request->x();
-            const auto requested_y = request->y();
-            const auto requested_z = request->z();
-
-            const auto gimbal_result =
-                _gimbal.send_mavlink_command(requested_target_system_id, 
-                                            requested_target_component_id, 
-                                            requested_command, requested_current,
-                                            requested_autocontinue, 
-                                            requested_param1, 
-                                            requested_param2, 
-                                            requested_param3, 
-                                            requested_param4, 
-                                            requested_x, 
-                                            requested_y, 
-                                            requested_z);
-
-            if (response != nullptr) {
-                auto* rpc_gimbal_result = new rpc::gimbal::GimbalResult();
-                rpc_gimbal_result->set_result(
-                    static_cast<rpc::gimbal::GimbalResult::Result>(gimbal_result));
-                rpc_gimbal_result->set_result_str(mavsdk::Gimbal::result_str(gimbal_result));
-
-                response->set_allocated_gimbal_result(rpc_gimbal_result);
-            }
-        }
-
-        return grpc::Status::OK;
-    }
-
     static mavsdk::Gimbal::GimbalMode translateRPCGimbalMode(const rpc::gimbal::GimbalMode mode)
     {
         switch (mode) {

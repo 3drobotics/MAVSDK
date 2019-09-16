@@ -107,26 +107,6 @@ float GimbalImpl::to_float_gimbal_mode(const Gimbal::GimbalMode gimbal_mode) con
     }
 }
 
-Gimbal::Result GimbalImpl::send_mavlink_command(uint8_t target_system_id, uint8_t target_component_id, uint16_t command, bool current, bool autocontinue, float param1, float param2, float param3, float param4, int32_t x, int32_t y, float z)
-{
-    MAVLinkCommands::CommandInt custom_command{};
-
-    // custom_command.target_system_id = _parent->target_system_id;
-    custom_command.target_component_id = _parent->get_autopilot_id();
-    // custom_command.frame = ;
-    custom_command.command = command;
-    custom_command.current = current;
-    custom_command.autocontinue = autocontinue;
-    custom_command.params.param1 = param1;
-    custom_command.params.param2 = param2;
-    custom_command.params.param3 = param3;
-    custom_command.params.param4 = param4;
-    custom_command.params.x = x;
-    custom_command.params.y = y;
-    custom_command.params.z = z;
-    return gimbal_result_from_command_result(_parent->send_command(custom_command));
-}
-
 Gimbal::Result
 GimbalImpl::set_roi_location(double latitude_deg, double longitude_deg, float altitude_m)
 {
