@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(COMPONENTS_LIST core action calibration gimbal camera mission offboard telemetry info param)
+set(COMPONENTS_LIST core action calibration gimbal camera mission offboard telemetry info param passthrough)
 
 include(cmake/compile_proto.cmake)
 
@@ -49,6 +49,7 @@ target_link_libraries(mavsdk_server
     mavsdk_telemetry
     mavsdk_info
     mavsdk_param
+    mavsdk_passthrough
     mavsdk
     gRPC::grpc++
     ${COMPONENTS_PROTOGENS}
