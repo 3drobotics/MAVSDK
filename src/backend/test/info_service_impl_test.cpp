@@ -30,7 +30,7 @@ static constexpr int ARBITRARY_SW_VERSION_OS_MAJOR = 4;
 static constexpr int ARBITRARY_SW_VERSION_OS_MINOR = 5;
 static constexpr int ARBITRARY_SW_VERSION_OS_PATCH = 6;
 
-std::vector<InputPair> generateInputPairs();
+// std::vector<InputPair> generateInputPairs();
 
 class InfoServiceImplTest : public ::testing::TestWithParam<InputPair> {};
 
@@ -90,18 +90,18 @@ TEST_F(InfoServiceImplTest, getVersionDoesNotCrashWithNullResponse)
     infoService.GetVersion(nullptr, nullptr, nullptr);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    InfoResultCorrespondences, InfoServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     InfoResultCorrespondences, InfoServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
 
-std::vector<InputPair> generateInputPairs()
-{
-    std::vector<InputPair> input_pairs;
-    input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Info::Result::SUCCESS));
-    input_pairs.push_back(std::make_pair(
-        "INFORMATION_NOT_RECEIVED_YET", mavsdk::Info::Result::INFORMATION_NOT_RECEIVED_YET));
-    input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Info::Result::UNKNOWN));
+// std::vector<InputPair> generateInputPairs()
+// {
+//     std::vector<InputPair> input_pairs;
+//     input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Info::Result::SUCCESS));
+//     input_pairs.push_back(std::make_pair(
+//         "INFORMATION_NOT_RECEIVED_YET", mavsdk::Info::Result::INFORMATION_NOT_RECEIVED_YET));
+//     input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Info::Result::UNKNOWN));
 
-    return input_pairs;
-}
+//     return input_pairs;
+// }
 
 } // namespace

@@ -24,6 +24,7 @@
 #include "param/param_service_impl.h"
 #include "plugins/offboard/offboard.h"
 #include "offboard/offboard_service_impl.h"
+#include "plugins/passthrough/passthrough.h"
 #include "passthrough/passthrough_service_impl.h"
 
 namespace mavsdk {

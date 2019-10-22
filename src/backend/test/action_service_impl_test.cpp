@@ -21,7 +21,7 @@ using InputPair = std::pair<std::string, mavsdk::Action::Result>;
 static constexpr float ARBITRARY_ALTITUDE = 42.42f;
 static constexpr float ARBITRARY_SPEED = 8.24f;
 
-std::vector<InputPair> generateInputPairs();
+// std::vector<InputPair> generateInputPairs();
 std::string armAndGetTranslatedResult(mavsdk::Action::Result arm_result);
 std::string disarmAndGetTranslatedResult(mavsdk::Action::Result disarm_result);
 std::string takeoffAndGetTranslatedResult(mavsdk::Action::Result takeoff_result);
@@ -495,34 +495,34 @@ TEST_P(ActionServiceImplTest, setReturnToLaunchAltitudeSetsRightValue)
     actionService.SetReturnToLaunchAltitude(nullptr, &request, nullptr);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    ActionResultCorrespondences, ActionServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
+//INSTANTIATE_TEST_CASE_P(
+//    ActionResultCorrespondences, ActionServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
 
-std::vector<InputPair> generateInputPairs()
-{
-    std::vector<InputPair> input_pairs;
-    input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Action::Result::SUCCESS));
-    input_pairs.push_back(std::make_pair("NO_SYSTEM", mavsdk::Action::Result::NO_SYSTEM));
-    input_pairs.push_back(
-        std::make_pair("CONNECTION_ERROR", mavsdk::Action::Result::CONNECTION_ERROR));
-    input_pairs.push_back(std::make_pair("BUSY", mavsdk::Action::Result::BUSY));
-    input_pairs.push_back(std::make_pair("COMMAND_DENIED", mavsdk::Action::Result::COMMAND_DENIED));
-    input_pairs.push_back(std::make_pair(
-        "COMMAND_DENIED_LANDED_STATE_UNKNOWN",
-        mavsdk::Action::Result::COMMAND_DENIED_LANDED_STATE_UNKNOWN));
-    input_pairs.push_back(std::make_pair(
-        "COMMAND_DENIED_NOT_LANDED", mavsdk::Action::Result::COMMAND_DENIED_NOT_LANDED));
-    input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Action::Result::TIMEOUT));
-    input_pairs.push_back(std::make_pair(
-        "VTOL_TRANSITION_SUPPORT_UNKNOWN",
-        mavsdk::Action::Result::VTOL_TRANSITION_SUPPORT_UNKNOWN));
-    input_pairs.push_back(std::make_pair(
-        "NO_VTOL_TRANSITION_SUPPORT", mavsdk::Action::Result::NO_VTOL_TRANSITION_SUPPORT));
-    input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Action::Result::UNKNOWN));
-    input_pairs.push_back(
-        std::make_pair("PARAMETER_ERROR", mavsdk::Action::Result::PARAMETER_ERROR));
+// std::vector<InputPair> generateInputPairs()
+// {
+//     std::vector<InputPair> input_pairs;
+//     input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Action::Result::SUCCESS));
+//     input_pairs.push_back(std::make_pair("NO_SYSTEM", mavsdk::Action::Result::NO_SYSTEM));
+//     input_pairs.push_back(
+//         std::make_pair("CONNECTION_ERROR", mavsdk::Action::Result::CONNECTION_ERROR));
+//     input_pairs.push_back(std::make_pair("BUSY", mavsdk::Action::Result::BUSY));
+//     input_pairs.push_back(std::make_pair("COMMAND_DENIED", mavsdk::Action::Result::COMMAND_DENIED));
+//     input_pairs.push_back(std::make_pair(
+//         "COMMAND_DENIED_LANDED_STATE_UNKNOWN",
+//         mavsdk::Action::Result::COMMAND_DENIED_LANDED_STATE_UNKNOWN));
+//     input_pairs.push_back(std::make_pair(
+//         "COMMAND_DENIED_NOT_LANDED", mavsdk::Action::Result::COMMAND_DENIED_NOT_LANDED));
+//     input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Action::Result::TIMEOUT));
+//     input_pairs.push_back(std::make_pair(
+//         "VTOL_TRANSITION_SUPPORT_UNKNOWN",
+//         mavsdk::Action::Result::VTOL_TRANSITION_SUPPORT_UNKNOWN));
+//     input_pairs.push_back(std::make_pair(
+//         "NO_VTOL_TRANSITION_SUPPORT", mavsdk::Action::Result::NO_VTOL_TRANSITION_SUPPORT));
+//     input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Action::Result::UNKNOWN));
+//     input_pairs.push_back(
+//         std::make_pair("PARAMETER_ERROR", mavsdk::Action::Result::PARAMETER_ERROR));
 
-    return input_pairs;
-}
+//     return input_pairs;
+// }
 
 } // namespace
