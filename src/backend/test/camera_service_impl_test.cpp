@@ -43,7 +43,7 @@ static constexpr auto ARBITRARY_OPTION_ID = "small";
 static constexpr auto ARBITRARY_OPTION_DESCRIPTION = "Bigger";
 static constexpr auto ARBITRARY_CAMERA_RESULT = mavsdk::Camera::Result::SUCCESS;
 
-std::vector<InputPair> generateInputPairs();
+// std::vector<InputPair> generateInputPairs();
 
 class CameraServiceImplTest : public ::testing::TestWithParam<InputPair> {
 protected:
@@ -1292,21 +1292,21 @@ TEST_F(CameraServiceImplTest, setSettingDoesNotCrashWhenArgsAreNull)
     _camera_service.SetSetting(nullptr, nullptr, nullptr);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    CameraResultCorrespondences, CameraServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     CameraResultCorrespondences, CameraServiceImplTest, ::testing::ValuesIn(generateInputPairs()));
 
-std::vector<InputPair> generateInputPairs()
-{
-    std::vector<InputPair> input_pairs;
-    input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Camera::Result::SUCCESS));
-    input_pairs.push_back(std::make_pair("BUSY", mavsdk::Camera::Result::BUSY));
-    input_pairs.push_back(std::make_pair("DENIED", mavsdk::Camera::Result::DENIED));
-    input_pairs.push_back(std::make_pair("ERROR", mavsdk::Camera::Result::ERROR));
-    input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Camera::Result::TIMEOUT));
-    input_pairs.push_back(std::make_pair("WRONG_ARGUMENT", mavsdk::Camera::Result::WRONG_ARGUMENT));
-    input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Camera::Result::UNKNOWN));
+// std::vector<InputPair> generateInputPairs()
+// {
+//     std::vector<InputPair> input_pairs;
+//     input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Camera::Result::SUCCESS));
+//     input_pairs.push_back(std::make_pair("BUSY", mavsdk::Camera::Result::BUSY));
+//     input_pairs.push_back(std::make_pair("DENIED", mavsdk::Camera::Result::DENIED));
+//     input_pairs.push_back(std::make_pair("ERROR", mavsdk::Camera::Result::ERROR));
+//     input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Camera::Result::TIMEOUT));
+//     input_pairs.push_back(std::make_pair("WRONG_ARGUMENT", mavsdk::Camera::Result::WRONG_ARGUMENT));
+//     input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Camera::Result::UNKNOWN));
 
-    return input_pairs;
-}
+//     return input_pairs;
+// }
 
 } // namespace

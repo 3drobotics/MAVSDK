@@ -44,7 +44,7 @@ static constexpr auto ARBITRARY_RESULT = dc::Mission::Result::UNKNOWN;
 static constexpr auto ARBITRARY_INDEX = 42;
 static constexpr auto ARBITRARY_SMALL_INT = 12;
 
-std::vector<InputPair> generateInputPairs();
+// std::vector<InputPair> generateInputPairs();
 
 std::vector<std::shared_ptr<dc::MissionItem>> generateListOfOneItem()
 {
@@ -179,10 +179,10 @@ protected:
     std::vector<std::shared_ptr<dc::MissionItem>> _uploaded_mission{};
 };
 
-INSTANTIATE_TEST_CASE_P(
-    MissionResultCorrespondences,
-    MissionServiceImplUploadTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     MissionResultCorrespondences,
+//     MissionServiceImplUploadTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
 ACTION_P3(SaveUploadParams, mission, callback, callback_saved_promise)
 {
@@ -287,10 +287,10 @@ protected:
     dc::Mission::mission_items_and_result_callback_t _download_callback{};
 };
 
-INSTANTIATE_TEST_CASE_P(
-    MissionResultCorrespondences,
-    MissionServiceImplDownloadTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     MissionResultCorrespondences,
+//     MissionServiceImplDownloadTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
 ACTION_P2(SaveResult, callback, callback_saved_promise)
 {
@@ -368,10 +368,10 @@ protected:
     std::future<void> startMissionAndSaveParams(std::shared_ptr<StartMissionResponse> response);
 };
 
-INSTANTIATE_TEST_CASE_P(
-    MissionResultCorrespondences,
-    MissionServiceImplStartTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     MissionResultCorrespondences,
+//     MissionServiceImplStartTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
 TEST_F(MissionServiceImplStartTest, doesNotFailWhenArgsAreNull)
 {
@@ -446,10 +446,10 @@ protected:
     std::future<void> pauseMissionAndSaveParams(std::shared_ptr<PauseMissionResponse> response);
 };
 
-INSTANTIATE_TEST_CASE_P(
-    MissionResultCorrespondences,
-    MissionServiceImplPauseTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     MissionResultCorrespondences,
+//     MissionServiceImplPauseTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
 TEST_F(MissionServiceImplPauseTest, doesNotFailWhenArgsAreNull)
 {
@@ -485,10 +485,10 @@ TEST_P(MissionServiceImplPauseTest, pauseResultIsTranslatedCorrectly)
 
 class MissionServiceImplSetCurrentTest : public MissionServiceImplTestBase {};
 
-INSTANTIATE_TEST_CASE_P(
-    MissionResultCorrespondences,
-    MissionServiceImplSetCurrentTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     MissionResultCorrespondences,
+//     MissionServiceImplSetCurrentTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
 ACTION_P2(SaveSetItemCallback, callback, callback_saved_promise)
 {
@@ -681,29 +681,29 @@ void MissionServiceImplSetRTLAfterMissionTest::checkSetRTLAfterMissionSets(
     _mission_service.SetReturnToLaunchAfterMission(nullptr, &request, nullptr);
 }
 
-std::vector<InputPair> generateInputPairs()
-{
-    std::vector<InputPair> input_pairs;
-    input_pairs.push_back(std::make_pair("UNKNOWN", dc::Mission::Result::UNKNOWN));
-    input_pairs.push_back(std::make_pair("SUCCESS", dc::Mission::Result::SUCCESS));
-    input_pairs.push_back(std::make_pair("ERROR", dc::Mission::Result::ERROR));
-    input_pairs.push_back(
-        std::make_pair("TOO_MANY_MISSION_ITEMS", dc::Mission::Result::TOO_MANY_MISSION_ITEMS));
-    input_pairs.push_back(std::make_pair("BUSY", dc::Mission::Result::BUSY));
-    input_pairs.push_back(std::make_pair("TIMEOUT", dc::Mission::Result::TIMEOUT));
-    input_pairs.push_back(
-        std::make_pair("INVALID_ARGUMENT", dc::Mission::Result::INVALID_ARGUMENT));
-    input_pairs.push_back(std::make_pair("UNSUPPORTED", dc::Mission::Result::UNSUPPORTED));
-    input_pairs.push_back(
-        std::make_pair("NO_MISSION_AVAILABLE", dc::Mission::Result::NO_MISSION_AVAILABLE));
-    input_pairs.push_back(
-        std::make_pair("FAILED_TO_OPEN_QGC_PLAN", dc::Mission::Result::FAILED_TO_OPEN_QGC_PLAN));
-    input_pairs.push_back(
-        std::make_pair("FAILED_TO_PARSE_QGC_PLAN", dc::Mission::Result::FAILED_TO_PARSE_QGC_PLAN));
-    input_pairs.push_back(
-        std::make_pair("UNSUPPORTED_MISSION_CMD", dc::Mission::Result::UNSUPPORTED_MISSION_CMD));
+// std::vector<InputPair> generateInputPairs()
+// {
+//     std::vector<InputPair> input_pairs;
+//     input_pairs.push_back(std::make_pair("UNKNOWN", dc::Mission::Result::UNKNOWN));
+//     input_pairs.push_back(std::make_pair("SUCCESS", dc::Mission::Result::SUCCESS));
+//     input_pairs.push_back(std::make_pair("ERROR", dc::Mission::Result::ERROR));
+//     input_pairs.push_back(
+//         std::make_pair("TOO_MANY_MISSION_ITEMS", dc::Mission::Result::TOO_MANY_MISSION_ITEMS));
+//     input_pairs.push_back(std::make_pair("BUSY", dc::Mission::Result::BUSY));
+//     input_pairs.push_back(std::make_pair("TIMEOUT", dc::Mission::Result::TIMEOUT));
+//     input_pairs.push_back(
+//         std::make_pair("INVALID_ARGUMENT", dc::Mission::Result::INVALID_ARGUMENT));
+//     input_pairs.push_back(std::make_pair("UNSUPPORTED", dc::Mission::Result::UNSUPPORTED));
+//     input_pairs.push_back(
+//         std::make_pair("NO_MISSION_AVAILABLE", dc::Mission::Result::NO_MISSION_AVAILABLE));
+//     input_pairs.push_back(
+//         std::make_pair("FAILED_TO_OPEN_QGC_PLAN", dc::Mission::Result::FAILED_TO_OPEN_QGC_PLAN));
+//     input_pairs.push_back(
+//         std::make_pair("FAILED_TO_PARSE_QGC_PLAN", dc::Mission::Result::FAILED_TO_PARSE_QGC_PLAN));
+//     input_pairs.push_back(
+//         std::make_pair("UNSUPPORTED_MISSION_CMD", dc::Mission::Result::UNSUPPORTED_MISSION_CMD));
 
-    return input_pairs;
-}
+//     return input_pairs;
+// }
 
 } // namespace

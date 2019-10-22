@@ -40,7 +40,7 @@ static constexpr float ARBITRARY_VELOCITY_HIGH = 14.6f;
 static constexpr float ARBITRARY_VELOCITY_NEG = -0.5f;
 static constexpr float ARBITRARY_YAWSPEED = 3.1f;
 
-std::vector<InputPair> generateInputPairs();
+// std::vector<InputPair> generateInputPairs();
 std::string startAndGetTranslatedResult(mavsdk::Offboard::Result start_result);
 std::string stopAndGetTranslatedResult(mavsdk::Offboard::Result stop_result);
 
@@ -459,27 +459,27 @@ TEST_F(OffboardServiceImplTest, setsVelocityNedCorrectly)
     offboardService.SetVelocityNed(nullptr, &request, nullptr);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    OffboardResultCorrespondences,
-    OffboardServiceImplTest,
-    ::testing::ValuesIn(generateInputPairs()));
+// INSTANTIATE_TEST_CASE_P(
+//     OffboardResultCorrespondences,
+//     OffboardServiceImplTest,
+//     ::testing::ValuesIn(generateInputPairs()));
 
-std::vector<InputPair> generateInputPairs()
-{
-    std::vector<InputPair> input_pairs;
-    input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Offboard::Result::SUCCESS));
-    input_pairs.push_back(std::make_pair("NO_SYSTEM", mavsdk::Offboard::Result::NO_SYSTEM));
-    input_pairs.push_back(
-        std::make_pair("CONNECTION_ERROR", mavsdk::Offboard::Result::CONNECTION_ERROR));
-    input_pairs.push_back(std::make_pair("BUSY", mavsdk::Offboard::Result::BUSY));
-    input_pairs.push_back(
-        std::make_pair("COMMAND_DENIED", mavsdk::Offboard::Result::COMMAND_DENIED));
-    input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Offboard::Result::TIMEOUT));
-    input_pairs.push_back(
-        std::make_pair("NO_SETPOINT_SET", mavsdk::Offboard::Result::NO_SETPOINT_SET));
-    input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Offboard::Result::UNKNOWN));
+// std::vector<InputPair> generateInputPairs()
+// {
+//     std::vector<InputPair> input_pairs;
+//     input_pairs.push_back(std::make_pair("SUCCESS", mavsdk::Offboard::Result::SUCCESS));
+//     input_pairs.push_back(std::make_pair("NO_SYSTEM", mavsdk::Offboard::Result::NO_SYSTEM));
+//     input_pairs.push_back(
+//         std::make_pair("CONNECTION_ERROR", mavsdk::Offboard::Result::CONNECTION_ERROR));
+//     input_pairs.push_back(std::make_pair("BUSY", mavsdk::Offboard::Result::BUSY));
+//     input_pairs.push_back(
+//         std::make_pair("COMMAND_DENIED", mavsdk::Offboard::Result::COMMAND_DENIED));
+//     input_pairs.push_back(std::make_pair("TIMEOUT", mavsdk::Offboard::Result::TIMEOUT));
+//     input_pairs.push_back(
+//         std::make_pair("NO_SETPOINT_SET", mavsdk::Offboard::Result::NO_SETPOINT_SET));
+//     input_pairs.push_back(std::make_pair("UNKNOWN", mavsdk::Offboard::Result::UNKNOWN));
 
-    return input_pairs;
-}
+//     return input_pairs;
+// }
 
 } // namespace
