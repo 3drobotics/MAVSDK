@@ -2,7 +2,6 @@
 #include "system.h"
 #include "math_conversions.h"
 #include "global_include.h"
-#include "px4_custom_mode.h"
 #include <cmath>
 #include <functional>
 #include <string>
@@ -78,6 +77,9 @@ void TelemetryImpl::init()
         MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS,
         std::bind(&TelemetryImpl::process_actuator_output_status, this, _1),
         this);
+
+    _parent->register_mavlink_message_handler(
+        MAVLINK_MSG_ID_ODOMETRY, std::bind(&TelemetryImpl::process_odometry, this, _1), this);
 
     _parent->register_mavlink_message_handler(
         MAVLINK_MSG_ID_UTM_GLOBAL_POSITION,
@@ -254,6 +256,12 @@ Telemetry::Result TelemetryImpl::set_rate_actuator_output_status(double rate_hz)
         _parent->set_msg_rate(MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS, rate_hz));
 }
 
+Telemetry::Result TelemetryImpl::set_rate_odometry(double rate_hz)
+{
+    return telemetry_result_from_command_result(
+        _parent->set_msg_rate(MAVLINK_MSG_ID_ODOMETRY, rate_hz));
+}
+
 void TelemetryImpl::set_rate_position_velocity_ned_async(
     double rate_hz, Telemetry::result_callback_t callback)
 {
@@ -376,6 +384,14 @@ void TelemetryImpl::set_rate_actuator_output_status_async(
 {
     _parent->set_msg_rate_async(
         MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS,
+        rate_hz,
+        std::bind(&TelemetryImpl::command_result_callback, std::placeholders::_1, callback));
+}
+
+void TelemetryImpl::set_rate_odometry_async(double rate_hz, Telemetry::result_callback_t callback)
+{
+    _parent->set_msg_rate_async(
+        MAVLINK_MSG_ID_ODOMETRY,
         rate_hz,
         std::bind(&TelemetryImpl::command_result_callback, std::placeholders::_1, callback));
 }
@@ -640,15 +656,13 @@ void TelemetryImpl::process_heartbeat(const mavlink_message_t& message)
         _parent->call_user_callback([callback, arg]() { callback(arg); });
     }
 
-    if (heartbeat.base_mode & MAV_MODE_FLAG_CUSTOM_MODE_ENABLED) {
-        Telemetry::FlightMode flight_mode = to_flight_mode_from_custom_mode(heartbeat.custom_mode);
-        set_flight_mode(flight_mode);
-
-        if (_flight_mode_subscription) {
-            auto callback = _flight_mode_subscription;
-            auto arg = get_flight_mode();
-            _parent->call_user_callback([callback, arg]() { callback(arg); });
-        }
+    if (_flight_mode_subscription) {
+        auto callback = _flight_mode_subscription;
+        // The flight mode is already parsed in SystemImpl, so we can take it
+        // from there.  This assumes that SystemImpl gets called first because
+        // it's earlier in the callback list.
+        auto arg = telemetry_flight_mode_from_flight_mode(_parent->get_flight_mode());
+        _parent->call_user_callback([callback, arg]() { callback(arg); });
     }
 
     if (_health_subscription) {
@@ -767,35 +781,46 @@ void TelemetryImpl::process_actuator_output_status(const mavlink_message_t& mess
     }
 }
 
-Telemetry::FlightMode TelemetryImpl::to_flight_mode_from_custom_mode(uint32_t custom_mode)
+void TelemetryImpl::process_odometry(const mavlink_message_t& message)
 {
-    px4::px4_custom_mode px4_custom_mode;
-    px4_custom_mode.data = custom_mode;
+    Telemetry::Odometry odometry{};
 
-    switch (px4_custom_mode.main_mode) {
-        case px4::PX4_CUSTOM_MAIN_MODE_OFFBOARD:
-            return Telemetry::FlightMode::OFFBOARD;
-        case px4::PX4_CUSTOM_MAIN_MODE_AUTO:
-            switch (px4_custom_mode.sub_mode) {
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_READY:
-                    return Telemetry::FlightMode::READY;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_TAKEOFF:
-                    return Telemetry::FlightMode::TAKEOFF;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_LOITER:
-                    return Telemetry::FlightMode::HOLD;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_MISSION:
-                    return Telemetry::FlightMode::MISSION;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_RTL:
-                    return Telemetry::FlightMode::RETURN_TO_LAUNCH;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_LAND:
-                    return Telemetry::FlightMode::LAND;
-                case px4::PX4_CUSTOM_SUB_MODE_AUTO_FOLLOW_TARGET:
-                    return Telemetry::FlightMode::FOLLOW_ME;
-                default:
-                    return Telemetry::FlightMode::UNKNOWN;
-            }
-        default:
-            return Telemetry::FlightMode::UNKNOWN;
+    odometry.time_usec = mavlink_msg_odometry_get_time_usec(&message);
+    odometry.frame_id =
+        static_cast<Telemetry::Odometry::MavFrame>(mavlink_msg_odometry_get_frame_id(&message));
+    odometry.child_frame_id = static_cast<Telemetry::Odometry::MavFrame>(
+        mavlink_msg_odometry_get_child_frame_id(&message));
+
+    odometry.position_body.x_m = mavlink_msg_odometry_get_x(&message);
+    odometry.position_body.y_m = mavlink_msg_odometry_get_y(&message);
+    odometry.position_body.z_m = mavlink_msg_odometry_get_z(&message);
+
+    std::array<float, 4> q{};
+    mavlink_msg_odometry_get_q(&message, q.data());
+    odometry.q.w = q[0];
+    odometry.q.x = q[1];
+    odometry.q.y = q[2];
+    odometry.q.z = q[3];
+
+    odometry.velocity_body.x_m_s = mavlink_msg_odometry_get_vx(&message);
+    odometry.velocity_body.y_m_s = mavlink_msg_odometry_get_vy(&message);
+    odometry.velocity_body.z_m_s = mavlink_msg_odometry_get_vz(&message);
+
+    odometry.angular_velocity_body.roll_rad_s = mavlink_msg_odometry_get_rollspeed(&message);
+    odometry.angular_velocity_body.pitch_rad_s = mavlink_msg_odometry_get_pitchspeed(&message);
+    odometry.angular_velocity_body.yaw_rad_s = mavlink_msg_odometry_get_yawspeed(&message);
+
+    mavlink_msg_odometry_get_pose_covariance(&message, odometry.pose_covariance.data());
+    mavlink_msg_odometry_get_velocity_covariance(&message, odometry.velocity_covariance.data());
+
+    odometry.reset_counter = mavlink_msg_odometry_get_reset_counter(&message);
+
+    set_odometry(odometry);
+
+    if (_odometry_subscription) {
+        auto callback = _odometry_subscription;
+        auto arg = get_odometry();
+        _parent->call_user_callback([callback, arg]() { callback(arg); });
     }
 }
 
@@ -813,6 +838,31 @@ TelemetryImpl::to_landed_state(mavlink_extended_sys_state_t extended_sys_state)
             return Telemetry::LandedState::ON_GROUND;
         default:
             return Telemetry::LandedState::UNKNOWN;
+    }
+}
+
+Telemetry::FlightMode
+TelemetryImpl::telemetry_flight_mode_from_flight_mode(SystemImpl::FlightMode flight_mode)
+{
+    switch (flight_mode) {
+        case SystemImpl::FlightMode::READY:
+            return Telemetry::FlightMode::READY;
+        case SystemImpl::FlightMode::TAKEOFF:
+            return Telemetry::FlightMode::TAKEOFF;
+        case SystemImpl::FlightMode::HOLD:
+            return Telemetry::FlightMode::HOLD;
+        case SystemImpl::FlightMode::MISSION:
+            return Telemetry::FlightMode::MISSION;
+        case SystemImpl::FlightMode::RETURN_TO_LAUNCH:
+            return Telemetry::FlightMode::RETURN_TO_LAUNCH;
+        case SystemImpl::FlightMode::LAND:
+            return Telemetry::FlightMode::LAND;
+        case SystemImpl::FlightMode::OFFBOARD:
+            return Telemetry::FlightMode::OFFBOARD;
+        case SystemImpl::FlightMode::FOLLOW_ME:
+            return Telemetry::FlightMode::FOLLOW_ME;
+        default:
+            return Telemetry::FlightMode::UNKNOWN;
     }
 }
 
@@ -1073,14 +1123,7 @@ void TelemetryImpl::set_battery(Telemetry::Battery battery)
 
 Telemetry::FlightMode TelemetryImpl::get_flight_mode() const
 {
-    std::lock_guard<std::mutex> lock(_flight_mode_mutex);
-    return _flight_mode;
-}
-
-void TelemetryImpl::set_flight_mode(Telemetry::FlightMode flight_mode)
-{
-    std::lock_guard<std::mutex> lock(_flight_mode_mutex);
-    _flight_mode = flight_mode;
+    return telemetry_flight_mode_from_flight_mode(_parent->get_flight_mode());
 }
 
 Telemetry::Health TelemetryImpl::get_health() const
@@ -1123,6 +1166,12 @@ Telemetry::ActuatorOutputStatus TelemetryImpl::get_actuator_output_status() cons
 {
     std::lock_guard<std::mutex> lock(_actuator_output_status_mutex);
     return _actuator_output_status;
+}
+
+Telemetry::Odometry TelemetryImpl::get_odometry() const
+{
+    std::lock_guard<std::mutex> lock(_odometry_mutex);
+    return _odometry;
 }
 
 void TelemetryImpl::set_health_local_position(bool ok)
@@ -1212,6 +1261,12 @@ void TelemetryImpl::set_actuator_output_status(
     std::lock_guard<std::mutex> lock(_actuator_output_status_mutex);
     _actuator_output_status.active = active;
     std::copy(actuators.begin(), actuators.end(), _actuator_output_status.actuator);
+}
+
+void TelemetryImpl::set_odometry(Telemetry::Odometry& odometry)
+{
+    std::lock_guard<std::mutex> lock(_actuator_output_status_mutex);
+    _odometry = odometry;
 }
 
 void TelemetryImpl::position_velocity_ned_async(
@@ -1333,6 +1388,11 @@ void TelemetryImpl::actuator_output_status_async(
     Telemetry::actuator_output_status_callback_t& callback)
 {
     _actuator_output_status_subscription = callback;
+}
+
+void TelemetryImpl::odometry_async(Telemetry::odometry_callback_t& callback)
+{
+    _odometry_subscription = callback;
 }
 
 void TelemetryImpl::process_parameter_update(const std::string& name)

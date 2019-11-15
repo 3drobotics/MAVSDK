@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(COMPONENTS_LIST action calibration camera core gimbal info mission offboard param passthrough telemetry)
+set(COMPONENTS_LIST action calibration camera core geofence gimbal info mission mocap offboard param passthrough shell telemetry)
 
 foreach(COMPONENT_NAME ${COMPONENTS_LIST})
     add_library(${COMPONENT_NAME}_proto_gens STATIC
@@ -30,7 +30,12 @@ if(IOS)
     set_property(SOURCE module.modulemap
         PROPERTY MACOSX_PACKAGE_LOCATION "Modules")
 
-    list(APPEND BACKEND_SOURCES module.modulemap)
+    list(APPEND BACKEND_SOURCES module.modulemap)For instance is this 0.5 in std::bind(&MAVLinkParameters::receive_timeout, this), 0.5, &_timeout_cookie); the timeout? If so should/could we increase that to 1.0 sec? (edited) 
+
+new messages
+Julian Oes 12:57 PM
+You could if that is actually the problem
+if something takes more than half a second I would also check if something in the autopilot/camera/connection is off to cause such a timeout>>>
 endif()
 
 if(IOS)
@@ -43,6 +48,7 @@ target_link_libraries(mavsdk_server
     PRIVATE
     mavsdk_action
     mavsdk_calibration
+    mavsdk_geofence
     mavsdk_gimbal
     mavsdk_camera
     mavsdk_mission
@@ -51,6 +57,8 @@ target_link_libraries(mavsdk_server
     mavsdk_info
     mavsdk_param
     mavsdk_passthrough
+    mavsdk_shell
+    mavsdk_mocap
     mavsdk
     gRPC::grpc++
     ${COMPONENTS_PROTOGENS}
@@ -111,3 +119,4 @@ else()
         )
     endif()
 endif()
+

@@ -16,6 +16,7 @@ void GRPCServer::run()
     builder.RegisterService(&_core);
     builder.RegisterService(&_action_service);
     builder.RegisterService(&_calibration_service);
+    builder.RegisterService(&_geofence_service);
     builder.RegisterService(&_gimbal_service);
     builder.RegisterService(&_camera_service);
     builder.RegisterService(&_mission_service);
@@ -24,6 +25,8 @@ void GRPCServer::run()
     builder.RegisterService(&_info_service);
     builder.RegisterService(&_param_service);
     builder.RegisterService(&_passthrough_service);
+    builder.RegisterService(&_shell_service);
+    builder.RegisterService(&_mocap_service);
 
     _server = builder.BuildAndStart();
     LogInfo() << "Server started";
