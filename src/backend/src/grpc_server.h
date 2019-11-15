@@ -24,6 +24,7 @@
 #include "param/param_service_impl.h"
 #include "plugins/offboard/offboard.h"
 #include "offboard/offboard_service_impl.h"
+#include "plugins/passthrough/passthrough.h"
 #include "passthrough/passthrough_service_impl.h"
 #include "plugins/shell/shell.h"
 #include "shell/shell_service_impl.h"
@@ -59,7 +60,7 @@ public:
         _param(_dc.system()),
         _param_service(_param),
         _passthrough(_dc.system()),
-        _passthrough_service(_passthrough)
+        _passthrough_service(_passthrough),
         _shell(_dc.system()),
         _shell_service(_shell),
         _mocap(_dc.system()),

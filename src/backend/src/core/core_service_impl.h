@@ -54,14 +54,14 @@ public:
                                         "calibration",
                                         "camera",
                                         "core",
+                                        "geofence",
                                         "gimbal",
                                         "info",
                                         "mission",
                                         "mocap",
                                         "offboard",
                                         "param",
-                                        "telemetry",
-                                        "passthrough"};
+                                        "passthrough",
                                         "shell",
                                         "telemetry"};
 
