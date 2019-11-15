@@ -194,7 +194,7 @@ void MAVLinkParameters::do_work()
 
             // We want to get notified if a timeout happens
             _parent.register_timeout_handler(
-                std::bind(&MAVLinkParameters::receive_timeout, this), 0.5, &_timeout_cookie);
+                std::bind(&MAVLinkParameters::receive_timeout, this), 1.0, &_timeout_cookie);
 
         } break;
 
@@ -245,7 +245,7 @@ void MAVLinkParameters::do_work()
 
             // We want to get notified if a timeout happens
             _parent.register_timeout_handler(
-                std::bind(&MAVLinkParameters::receive_timeout, this), 0.5, &_timeout_cookie);
+                std::bind(&MAVLinkParameters::receive_timeout, this), 1.0, &_timeout_cookie);
 
         } break;
     }

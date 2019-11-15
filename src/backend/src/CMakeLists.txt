@@ -30,12 +30,7 @@ if(IOS)
     set_property(SOURCE module.modulemap
         PROPERTY MACOSX_PACKAGE_LOCATION "Modules")
 
-    list(APPEND BACKEND_SOURCES module.modulemap)For instance is this 0.5 in std::bind(&MAVLinkParameters::receive_timeout, this), 0.5, &_timeout_cookie); the timeout? If so should/could we increase that to 1.0 sec? (edited) 
-
-new messages
-Julian Oes 12:57 PM
-You could if that is actually the problem
-if something takes more than half a second I would also check if something in the autopilot/camera/connection is off to cause such a timeout>>>
+    list(APPEND BACKEND_SOURCES module.modulemap)
 endif()
 
 if(IOS)
