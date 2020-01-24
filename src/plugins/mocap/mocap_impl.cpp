@@ -150,26 +150,27 @@ bool MocapImpl::send_odometry()
     q[2] = odometry.q.y;
     q[3] = odometry.q.z;
 
-    mavlink_msg_odometry_pack(
-        _parent->get_own_system_id(),
-        _parent->get_own_component_id(),
-        &message,
-        odometry.time_usec,
-        static_cast<uint8_t>(odometry.frame_id),
-        static_cast<uint8_t>(MAV_FRAME_BODY_FRD),
-        odometry.position_body.x_m,
-        odometry.position_body.y_m,
-        odometry.position_body.z_m,
-        q.data(),
-        odometry.speed_body.x_m_s,
-        odometry.speed_body.y_m_s,
-        odometry.speed_body.z_m_s,
-        odometry.angular_velocity_body.roll_rad_s,
-        odometry.angular_velocity_body.pitch_rad_s,
-        odometry.angular_velocity_body.yaw_rad_s,
-        odometry.pose_covariance.data(),
-        odometry.velocity_covariance.data(),
-        0);
+// Anotacao
+    // mavlink_msg_odometry_pack(
+    //     _parent->get_own_system_id(),
+    //     _parent->get_own_component_id(),
+    //     &message,
+    //     odometry.time_usec,
+    //     static_cast<uint8_t>(odometry.frame_id),
+    //     static_cast<uint8_t>(MAV_FRAME_BODY_FRD),
+    //     odometry.position_body.x_m,
+    //     odometry.position_body.y_m,
+    //     odometry.position_body.z_m,
+    //     q.data(),
+    //     odometry.speed_body.x_m_s,
+    //     odometry.speed_body.y_m_s,
+    //     odometry.speed_body.z_m_s,
+    //     odometry.angular_velocity_body.roll_rad_s,
+    //     odometry.angular_velocity_body.pitch_rad_s,
+    //     odometry.angular_velocity_body.yaw_rad_s,
+    //     odometry.pose_covariance.data(),
+    //     odometry.velocity_covariance.data(),
+    //     0);
 
     return _parent->send_message(message);
 }

@@ -51,27 +51,27 @@ PassthroughService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>&
 }
 
 void PassthroughService::Stub::experimental_async::SendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendMessage(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::SendMessage(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendMessage_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendMessageResponse>* PassthroughService::Stub::AsyncSendMessageRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendMessageResponse>::Create(channel_.get(), cq, rpcmethod_SendMessage_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendMessageResponse>::Create(channel_.get(), cq, rpcmethod_SendMessage_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendMessageResponse>* PassthroughService::Stub::PrepareAsyncSendMessageRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendMessageResponse>::Create(channel_.get(), cq, rpcmethod_SendMessage_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendMessageResponse>::Create(channel_.get(), cq, rpcmethod_SendMessage_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) {
@@ -79,27 +79,27 @@ void PassthroughService::Stub::experimental_async::SendMessage(::grpc::ClientCon
 }
 
 void PassthroughService::Stub::experimental_async::GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetOurSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::GetOurSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurSysId_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>* PassthroughService::Stub::AsyncGetOurSysIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurSysId_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurSysId_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>* PassthroughService::Stub::PrepareAsyncGetOurSysIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurSysId_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurSysId_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) {
@@ -107,27 +107,27 @@ void PassthroughService::Stub::experimental_async::GetOurSysId(::grpc::ClientCon
 }
 
 void PassthroughService::Stub::experimental_async::GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetOurCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::GetOurCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetOurCompId_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>* PassthroughService::Stub::AsyncGetOurCompIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurCompId_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurCompId_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>* PassthroughService::Stub::PrepareAsyncGetOurCompIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurCompId_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetOurCompId_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) {
@@ -135,27 +135,27 @@ void PassthroughService::Stub::experimental_async::GetOurCompId(::grpc::ClientCo
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetSysId_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>* PassthroughService::Stub::AsyncGetTargetSysIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetSysId_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetSysId_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>* PassthroughService::Stub::PrepareAsyncGetTargetSysIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetSysId_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetSysId_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) {
@@ -163,27 +163,27 @@ void PassthroughService::Stub::experimental_async::GetTargetSysId(::grpc::Client
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::GetTargetCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetTargetCompId_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>* PassthroughService::Stub::AsyncGetTargetCompIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetCompId_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetCompId_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>* PassthroughService::Stub::PrepareAsyncGetTargetCompIdRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetCompId_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>::Create(channel_.get(), cq, rpcmethod_GetTargetCompId_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) {
@@ -191,27 +191,27 @@ void PassthroughService::Stub::experimental_async::GetTargetCompId(::grpc::Clien
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandInt(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandInt(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandInt_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendCommandIntResponse>* PassthroughService::Stub::AsyncSendCommandIntRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandIntResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandInt_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandIntResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandInt_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendCommandIntResponse>* PassthroughService::Stub::PrepareAsyncSendCommandIntRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandIntResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandInt_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandIntResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandInt_, context, request, false);
 }
 
 ::grpc::Status PassthroughService::Stub::SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest& request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) {
@@ -219,27 +219,27 @@ void PassthroughService::Stub::experimental_async::SendCommandInt(::grpc::Client
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandLong(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, std::move(f));
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, reactor);
 }
 
 void PassthroughService::Stub::experimental_async::SendCommandLong(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, reactor);
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_SendCommandLong_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendCommandLongResponse>* PassthroughService::Stub::AsyncSendCommandLongRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandLongResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandLong_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandLongResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandLong_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::mavsdk::rpc::passthrough::SendCommandLongResponse>* PassthroughService::Stub::PrepareAsyncSendCommandLongRaw(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandLongResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandLong_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::mavsdk::rpc::passthrough::SendCommandLongResponse>::Create(channel_.get(), cq, rpcmethod_SendCommandLong_, context, request, false);
 }
 
 PassthroughService::Service::Service() {

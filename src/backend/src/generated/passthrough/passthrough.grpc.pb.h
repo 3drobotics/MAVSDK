@@ -11,10 +11,13 @@
 #include <grpcpp/impl/codegen/async_stream.h>
 #include <grpcpp/impl/codegen/async_unary_call.h>
 #include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/client_context.h>
+#include <grpcpp/impl/codegen/completion_queue.h>
 #include <grpcpp/impl/codegen/method_handler_impl.h>
 #include <grpcpp/impl/codegen/proto_utils.h>
 #include <grpcpp/impl/codegen/rpc_method.h>
 #include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/server_context.h>
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/status.h>
 #include <grpcpp/impl/codegen/stub_options.h>
@@ -37,6 +40,7 @@ namespace mavsdk {
 namespace rpc {
 namespace passthrough {
 
+// Provide raw access to mavlink commands.
 class PassthroughService final {
  public:
   static constexpr char const* service_full_name() {
@@ -45,6 +49,10 @@ class PassthroughService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest& request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendMessageResponse>> AsyncSendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendMessageResponse>>(AsyncSendMessageRaw(context, request, cq));
@@ -52,6 +60,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendMessageResponse>> PrepareAsyncSendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendMessageResponse>>(PrepareAsyncSendMessageRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>> AsyncGetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>>(AsyncGetOurSysIdRaw(context, request, cq));
@@ -59,6 +71,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>> PrepareAsyncGetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurSysIdResponse>>(PrepareAsyncGetOurSysIdRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>> AsyncGetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>>(AsyncGetOurCompIdRaw(context, request, cq));
@@ -66,6 +82,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>> PrepareAsyncGetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetOurCompIdResponse>>(PrepareAsyncGetOurCompIdRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>> AsyncGetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>>(AsyncGetTargetSysIdRaw(context, request, cq));
@@ -73,6 +93,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>> PrepareAsyncGetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>>(PrepareAsyncGetTargetSysIdRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>> AsyncGetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>>(AsyncGetTargetCompIdRaw(context, request, cq));
@@ -80,6 +104,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>> PrepareAsyncGetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>>(PrepareAsyncGetTargetCompIdRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandIntResponse>> AsyncSendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandIntResponse>>(AsyncSendCommandIntRaw(context, request, cq));
@@ -87,6 +115,10 @@ class PassthroughService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandIntResponse>> PrepareAsyncSendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandIntResponse>>(PrepareAsyncSendCommandIntRaw(context, request, cq));
     }
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest& request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandLongResponse>> AsyncSendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::mavsdk::rpc::passthrough::SendCommandLongResponse>>(AsyncSendCommandLongRaw(context, request, cq));
@@ -97,30 +129,58 @@ class PassthroughService final {
     class experimental_async_interface {
      public:
       virtual ~experimental_async_interface() {}
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void SendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendMessage(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendMessage(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void SendMessage(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetOurSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetOurSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void GetOurSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetOurCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetOurCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void GetOurCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetTargetSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetTargetSysId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void GetTargetSysId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetTargetCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetTargetCompId(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void GetTargetCompId(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendCommandInt(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendCommandInt(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void SendCommandInt(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      //
+      // Send Message.
+      //
+      // If the type is wrong, the result will be `WRONG_TYPE`.
       virtual void SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendCommandLong(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendCommandLong(::grpc::ClientContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
@@ -265,18 +325,46 @@ class PassthroughService final {
    public:
     Service();
     virtual ~Service();
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response);
+    //
+    // Send Message.
+    //
+    // If the type is wrong, the result will be `WRONG_TYPE`.
     virtual ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_SendMessage() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -285,7 +373,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -296,7 +384,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetOurSysId() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -305,7 +393,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -316,7 +404,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetOurCompId() {
       ::grpc::Service::MarkMethodAsync(2);
@@ -325,7 +413,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -336,7 +424,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetTargetSysId() {
       ::grpc::Service::MarkMethodAsync(3);
@@ -345,7 +433,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -356,7 +444,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_GetTargetCompId() {
       ::grpc::Service::MarkMethodAsync(4);
@@ -365,7 +453,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -376,7 +464,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_SendCommandInt() {
       ::grpc::Service::MarkMethodAsync(5);
@@ -385,7 +473,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -396,7 +484,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithAsyncMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_SendCommandLong() {
       ::grpc::Service::MarkMethodAsync(6);
@@ -405,7 +493,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -417,11 +505,11 @@ class PassthroughService final {
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_SendMessage() {
       ::grpc::Service::experimental().MarkMethodCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendMessageRequest, ::mavsdk::rpc::passthrough::SendMessageResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendMessageRequest, ::mavsdk::rpc::passthrough::SendMessageResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::SendMessageRequest* request,
                  ::mavsdk::rpc::passthrough::SendMessageResponse* response,
@@ -431,7 +519,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_SendMessage(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::SendMessageRequest, ::mavsdk::rpc::passthrough::SendMessageResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendMessageRequest, ::mavsdk::rpc::passthrough::SendMessageResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendMessageRequest, ::mavsdk::rpc::passthrough::SendMessageResponse>*>(
           ::grpc::Service::experimental().GetHandler(0))
               ->SetMessageAllocator(allocator);
     }
@@ -439,20 +527,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_GetOurSysId() {
       ::grpc::Service::experimental().MarkMethodCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurSysIdRequest, ::mavsdk::rpc::passthrough::GetOurSysIdResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurSysIdRequest, ::mavsdk::rpc::passthrough::GetOurSysIdResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request,
                  ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response,
@@ -462,7 +550,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_GetOurSysId(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::GetOurSysIdRequest, ::mavsdk::rpc::passthrough::GetOurSysIdResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurSysIdRequest, ::mavsdk::rpc::passthrough::GetOurSysIdResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurSysIdRequest, ::mavsdk::rpc::passthrough::GetOurSysIdResponse>*>(
           ::grpc::Service::experimental().GetHandler(1))
               ->SetMessageAllocator(allocator);
     }
@@ -470,20 +558,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_GetOurCompId() {
       ::grpc::Service::experimental().MarkMethodCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurCompIdRequest, ::mavsdk::rpc::passthrough::GetOurCompIdResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurCompIdRequest, ::mavsdk::rpc::passthrough::GetOurCompIdResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request,
                  ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response,
@@ -493,7 +581,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_GetOurCompId(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::GetOurCompIdRequest, ::mavsdk::rpc::passthrough::GetOurCompIdResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurCompIdRequest, ::mavsdk::rpc::passthrough::GetOurCompIdResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetOurCompIdRequest, ::mavsdk::rpc::passthrough::GetOurCompIdResponse>*>(
           ::grpc::Service::experimental().GetHandler(2))
               ->SetMessageAllocator(allocator);
     }
@@ -501,20 +589,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_GetTargetSysId() {
       ::grpc::Service::experimental().MarkMethodCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetSysIdRequest, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetSysIdRequest, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request,
                  ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response,
@@ -524,7 +612,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_GetTargetSysId(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::GetTargetSysIdRequest, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetSysIdRequest, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetSysIdRequest, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse>*>(
           ::grpc::Service::experimental().GetHandler(3))
               ->SetMessageAllocator(allocator);
     }
@@ -532,20 +620,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_GetTargetCompId() {
       ::grpc::Service::experimental().MarkMethodCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetCompIdRequest, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetCompIdRequest, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request,
                  ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response,
@@ -555,7 +643,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_GetTargetCompId(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::GetTargetCompIdRequest, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetCompIdRequest, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::GetTargetCompIdRequest, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse>*>(
           ::grpc::Service::experimental().GetHandler(4))
               ->SetMessageAllocator(allocator);
     }
@@ -563,20 +651,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_SendCommandInt() {
       ::grpc::Service::experimental().MarkMethodCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandIntRequest, ::mavsdk::rpc::passthrough::SendCommandIntResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandIntRequest, ::mavsdk::rpc::passthrough::SendCommandIntResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request,
                  ::mavsdk::rpc::passthrough::SendCommandIntResponse* response,
@@ -586,7 +674,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_SendCommandInt(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::SendCommandIntRequest, ::mavsdk::rpc::passthrough::SendCommandIntResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandIntRequest, ::mavsdk::rpc::passthrough::SendCommandIntResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandIntRequest, ::mavsdk::rpc::passthrough::SendCommandIntResponse>*>(
           ::grpc::Service::experimental().GetHandler(5))
               ->SetMessageAllocator(allocator);
     }
@@ -594,20 +682,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_SendCommandLong() {
       ::grpc::Service::experimental().MarkMethodCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandLongRequest, ::mavsdk::rpc::passthrough::SendCommandLongResponse>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandLongRequest, ::mavsdk::rpc::passthrough::SendCommandLongResponse>(
           [this](::grpc::ServerContext* context,
                  const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request,
                  ::mavsdk::rpc::passthrough::SendCommandLongResponse* response,
@@ -617,7 +705,7 @@ class PassthroughService final {
     }
     void SetMessageAllocatorFor_SendCommandLong(
         ::grpc::experimental::MessageAllocator< ::mavsdk::rpc::passthrough::SendCommandLongRequest, ::mavsdk::rpc::passthrough::SendCommandLongResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandLongRequest, ::mavsdk::rpc::passthrough::SendCommandLongResponse>*>(
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::mavsdk::rpc::passthrough::SendCommandLongRequest, ::mavsdk::rpc::passthrough::SendCommandLongResponse>*>(
           ::grpc::Service::experimental().GetHandler(6))
               ->SetMessageAllocator(allocator);
     }
@@ -625,17 +713,17 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   typedef ExperimentalWithCallbackMethod_SendMessage<ExperimentalWithCallbackMethod_GetOurSysId<ExperimentalWithCallbackMethod_GetOurCompId<ExperimentalWithCallbackMethod_GetTargetSysId<ExperimentalWithCallbackMethod_GetTargetCompId<ExperimentalWithCallbackMethod_SendCommandInt<ExperimentalWithCallbackMethod_SendCommandLong<Service > > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_SendMessage() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -644,7 +732,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -652,7 +740,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetOurSysId() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -661,7 +749,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -669,7 +757,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetOurCompId() {
       ::grpc::Service::MarkMethodGeneric(2);
@@ -678,7 +766,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -686,7 +774,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetTargetSysId() {
       ::grpc::Service::MarkMethodGeneric(3);
@@ -695,7 +783,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -703,7 +791,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_GetTargetCompId() {
       ::grpc::Service::MarkMethodGeneric(4);
@@ -712,7 +800,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -720,7 +808,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_SendCommandInt() {
       ::grpc::Service::MarkMethodGeneric(5);
@@ -729,7 +817,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -737,7 +825,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithGenericMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_SendCommandLong() {
       ::grpc::Service::MarkMethodGeneric(6);
@@ -746,7 +834,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -754,7 +842,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_SendMessage() {
       ::grpc::Service::MarkMethodRaw(0);
@@ -763,7 +851,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -774,7 +862,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetOurSysId() {
       ::grpc::Service::MarkMethodRaw(1);
@@ -783,7 +871,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -794,7 +882,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetOurCompId() {
       ::grpc::Service::MarkMethodRaw(2);
@@ -803,7 +891,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -814,7 +902,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetTargetSysId() {
       ::grpc::Service::MarkMethodRaw(3);
@@ -823,7 +911,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -834,7 +922,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_GetTargetCompId() {
       ::grpc::Service::MarkMethodRaw(4);
@@ -843,7 +931,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -854,7 +942,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_SendCommandInt() {
       ::grpc::Service::MarkMethodRaw(5);
@@ -863,7 +951,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -874,7 +962,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithRawMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_SendCommandLong() {
       ::grpc::Service::MarkMethodRaw(6);
@@ -883,7 +971,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -894,11 +982,11 @@ class PassthroughService final {
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_SendMessage() {
       ::grpc::Service::experimental().MarkMethodRawCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -910,20 +998,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendMessage(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendMessage(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_GetOurSysId() {
       ::grpc::Service::experimental().MarkMethodRawCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -935,20 +1023,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetOurSysId(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetOurSysId(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_GetOurCompId() {
       ::grpc::Service::experimental().MarkMethodRawCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -960,20 +1048,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetOurCompId(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetOurCompId(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_GetTargetSysId() {
       ::grpc::Service::experimental().MarkMethodRawCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -985,20 +1073,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetTargetSysId(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetTargetSysId(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_GetTargetCompId() {
       ::grpc::Service::experimental().MarkMethodRawCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -1010,20 +1098,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void GetTargetCompId(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void GetTargetCompId(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_SendCommandInt() {
       ::grpc::Service::experimental().MarkMethodRawCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -1035,20 +1123,20 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendCommandInt(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendCommandInt(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_SendCommandLong() {
       ::grpc::Service::experimental().MarkMethodRawCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
@@ -1060,16 +1148,16 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void SendCommandLong(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void SendCommandLong(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_SendMessage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_SendMessage() {
       ::grpc::Service::MarkMethodStreamed(0,
@@ -1079,7 +1167,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendMessageRequest* request, ::mavsdk::rpc::passthrough::SendMessageResponse* response) override {
+    ::grpc::Status SendMessage(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendMessageRequest* /*request*/, ::mavsdk::rpc::passthrough::SendMessageResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1089,7 +1177,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetOurSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetOurSysId() {
       ::grpc::Service::MarkMethodStreamed(1,
@@ -1099,7 +1187,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetOurSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* request, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* response) override {
+    ::grpc::Status GetOurSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1109,7 +1197,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetOurCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetOurCompId() {
       ::grpc::Service::MarkMethodStreamed(2,
@@ -1119,7 +1207,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetOurCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* request, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* response) override {
+    ::grpc::Status GetOurCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetOurCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetOurCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1129,7 +1217,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetTargetSysId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetTargetSysId() {
       ::grpc::Service::MarkMethodStreamed(3,
@@ -1139,7 +1227,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetTargetSysId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* response) override {
+    ::grpc::Status GetTargetSysId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetSysIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetSysIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1149,7 +1237,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetTargetCompId : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_GetTargetCompId() {
       ::grpc::Service::MarkMethodStreamed(4,
@@ -1159,7 +1247,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetTargetCompId(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* request, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* response) override {
+    ::grpc::Status GetTargetCompId(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::GetTargetCompIdRequest* /*request*/, ::mavsdk::rpc::passthrough::GetTargetCompIdResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1169,7 +1257,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_SendCommandInt : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_SendCommandInt() {
       ::grpc::Service::MarkMethodStreamed(5,
@@ -1179,7 +1267,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status SendCommandInt(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* request, ::mavsdk::rpc::passthrough::SendCommandIntResponse* response) override {
+    ::grpc::Status SendCommandInt(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandIntRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandIntResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1189,7 +1277,7 @@ class PassthroughService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_SendCommandLong : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_SendCommandLong() {
       ::grpc::Service::MarkMethodStreamed(6,
@@ -1199,7 +1287,7 @@ class PassthroughService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status SendCommandLong(::grpc::ServerContext* context, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* request, ::mavsdk::rpc::passthrough::SendCommandLongResponse* response) override {
+    ::grpc::Status SendCommandLong(::grpc::ServerContext* /*context*/, const ::mavsdk::rpc::passthrough::SendCommandLongRequest* /*request*/, ::mavsdk::rpc::passthrough::SendCommandLongResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
