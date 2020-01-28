@@ -54,6 +54,14 @@ public:
     };
 
     /**
+     * @brief Gimbal mode type.
+     */
+    enum class GimbalMode {
+        YAW_FOLLOW, /**< @brief Yaw follow mode. */
+        YAW_LOCK /**< @brief Yaw lock mode. */
+    };
+
+    /**
      * @brief Returns a human-readable English string for Gimbal::Result.
      *
      * @param result The enum value for which a human readable string is required.
